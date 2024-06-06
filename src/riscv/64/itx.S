@@ -1582,20 +1582,20 @@ function inv_txfm_add_\txfm1\()_\txfm2\()_16x16_8bpc_rvv, export=1, ext=v
   li t3, 16
 2:
   add t0, a0, a1
+  add t4, a0, t2
+  add t5, t0, t2
+  add t6, t4, t2
+  add a3, t5, t2
+  add a4, t6, t2
+  add a5, a3, t2
   vle8.v v16, (a0)
-  add t1, a0, t2
   vle8.v v17, (t0)
-  add t0, t0, t2
-  vle8.v v18, (t1)
-  add t1, t1, t2
-  vle8.v v19, (t0)
-  add t0, t0, t2
-  vle8.v v20, (t1)
-  add t1, t1, t2
-  vle8.v v21, (t0)
-  add t0, t0, t2
-  vle8.v v22, (t1)
-  vle8.v v23, (t0)
+  vle8.v v18, (t4)
+  vle8.v v19, (t5)
+  vle8.v v20, (t6)
+  vle8.v v21, (a3)
+  vle8.v v22, (a4)
+  vle8.v v23, (a5)
 
   vwaddu.wv v0, v24, v16
   vwaddu.wv v2, v24, v17
@@ -1625,23 +1625,16 @@ function inv_txfm_add_\txfm1\()_\txfm2\()_16x16_8bpc_rvv, export=1, ext=v
   vnclipu.wi  v22, v12, 0
   vnclipu.wi  v23, v14, 0
 
-  add t0, a0, a1
   vse8.v v16, (a0)
-  add t1, a0, t2
+  add a0, a5, a1
   vse8.v v17, (t0)
-  add t0, t0, t2
-  vse8.v v18, (t1)
-  add t1, t1, t2
-  vse8.v v19, (t0)
-  add t0, t0, t2
-  vse8.v v20, (t1)
-  add t1, t1, t2
-  vse8.v v21, (t0)
-  add t0, t0, t2
-  vse8.v v22, (t1)
-  vse8.v v23, (t0)
+  vse8.v v18, (t4)
+  vse8.v v19, (t5)
+  vse8.v v20, (t6)
+  vse8.v v21, (a3)
+  vse8.v v22, (a4)
+  vse8.v v23, (a5)
 
-  add a0, t0, a1
   bnez t3, 2b
 
   ret
