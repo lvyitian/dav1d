@@ -1577,7 +1577,7 @@ function inv_txfm_add_\txfm1\()_\txfm2\()_16x16_8bpc_rvv, export=1, ext=v
   vsmul.vx v24, v24, t1
   vssra.vi v24, v24, 4
 
-  vsetivli zero, 16, e8, m1, ta, ma
+  vsetvli zero, zero, e8, m1, ta, ma
   add t2, a1, a1
   li t3, 16
 2:
