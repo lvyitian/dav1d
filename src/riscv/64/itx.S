@@ -1568,6 +1568,7 @@ function inv_txfm_add_\txfm1\()_\txfm2\()_16x16_8bpc_rvv, export=1, ext=v
 1:
   csrw vxrm, zero
   vsetivli zero, 16, e16, m2, ta, ma
+  li t4, 128
   ld t2, (a2)
   li t1, 2896*8
   vmv.v.x v24, t2
@@ -1576,6 +1577,7 @@ function inv_txfm_add_\txfm1\()_\txfm2\()_16x16_8bpc_rvv, export=1, ext=v
   vssra.vi v24, v24, 2
   vsmul.vx v24, v24, t1
   vssra.vi v24, v24, 4
+  vsub.vx v24, v24, t4
 
   vsetvli zero, zero, e8, m1, ta, ma
   add t2, a1, a1
@@ -1608,22 +1610,18 @@ function inv_txfm_add_\txfm1\()_\txfm2\()_16x16_8bpc_rvv, export=1, ext=v
 
   addi t3, t3, -8 # loop counter
 
+  vnclip.wi  v16, v0, 0
+  vnclip.wi  v17, v2, 0
+  vnclip.wi  v18, v4, 0
+  vnclip.wi  v19, v6, 0
+  vnclip.wi  v20, v8, 0
+  vnclip.wi  v21, v10, 0
+  vnclip.wi  v22, v12, 0
+  vnclip.wi  v23, v14, 0
 
-  vsetvli zero, zero, e16, m2, ta, ma
-.irp i, 0, 2, 4, 6, 8, 10, 12, 14
-  vmax.vx v\i, v\i, zero
+.irp i, 16, 17, 18, 19, 20, 21, 22, 23
+  vxor.vx v\i, v\i, t4
 .endr
-
-  vsetvli zero, zero, e8, m1, ta, ma
-
-  vnclipu.wi  v16, v0, 0
-  vnclipu.wi  v17, v2, 0
-  vnclipu.wi  v18, v4, 0
-  vnclipu.wi  v19, v6, 0
-  vnclipu.wi  v20, v8, 0
-  vnclipu.wi  v21, v10, 0
-  vnclipu.wi  v22, v12, 0
-  vnclipu.wi  v23, v14, 0
 
   add t0, a0, a1
   vse8.v v16, (a0)
