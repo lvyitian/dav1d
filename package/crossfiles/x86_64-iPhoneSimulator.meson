@@ -15,12 +15,12 @@ objc_args = ['-miphoneos-version-min=11.0']
 objcpp_args = ['-miphoneos-version-min=11.0']
 
 [properties]
-root = '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer'
+root = '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer'
 needs_exe_wrapper = true
 
 [host_machine]
 system = 'darwin'
-subsystem = 'ios'
+subsystem = 'ios-simulator'
 kernel = 'xnu'
 cpu_family = 'x86_64'
 cpu = 'x86_64'
