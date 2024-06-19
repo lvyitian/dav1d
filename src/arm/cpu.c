@@ -174,7 +174,13 @@ COLD unsigned dav1d_get_cpu_flags_arm(void) {
 #else  /* Unsupported OS */
 
 COLD unsigned dav1d_get_cpu_flags_arm(void) {
-    return 0;
+    unsigned flags = 0;
+
+#if defined(__ARM_NEON) || ARCH_AARCH64
+    flags |= DAV1D_ARM_CPU_FLAG_NEON;
+#endif
+
+    return flags;
 }
 
 #endif
